@@ -22,26 +22,39 @@ forgotPassword = Here is a hint + "This password you set should not be used beca
 resetPassword = Let's reset your account + "This password you set should not be used because it glitches the system"
 
 passwordCheck("jenis1", "", 6, "forgot", "reset") ! !wrong don't use this! !
-*/
 
+    
 
-function passwordCheck(correctPassword, userInput, requiredLength, forgotPassword, resetPassword){
-    if(userInput.length === requiredLength && correctPassword) {
-        console.log("Access Granted!");
-    } else if(userInput.length != requiredLength && correctPassword) {
-        console.log("Access Denied!");
-    } else if(userInput === forgotPassword) {
-        console.log("Here's a hint." + " This password you set should not be used because it glitches the system!");
-    } else if(userInput === resetPassword) {
-        console.log("Let's reset your account." + " This password you set should not be used because it glitches the system!");
     } else if(userInput != requiredLength) {
         console.log("Your password is too short!");
     }
+
+*/
+/*&& correctPassword*/
+
+
+
+function passwordCheck(correctPassword, userInput, requiredLength, forgotPassword, resetPassword) {
+    if (userInput.length === requiredLength && userInput === correctPassword) {
+        console.log("Access Granted!");
+    } else if(userInput === forgotPassword) {
+        console.log("Here's a hint." + " The password you set should not be used because it glitches the system!");
+    } else if(userInput === resetPassword) {
+        console.log("Let's reset your account." + " The password you set should not be used because it glitches the system!");
+    } else if(userInput != correctPassword && userInput.length === requiredLength) {
+        console.log("Access Denied!");
+    } else if(userInput != correctPassword && userInput.length >= requiredLength) {
+        console.log("Access Denied!" + " Your password is too long!");
+    } else if(userInput != correctPassword && userInput.length <= requiredLength) {
+        console.log("Access Denied!" + " Your password is too short!");
+    } 
 }
 
 
-passwordCheck("jenis1", "jenis1", 6, "forgot", "reset") /* "Access Granted!" */
-passwordCheck("jenis1", "shmenis2", 6, "forgot", "reset") /* "Access Denied!" */
-passwordCheck(undefined, "forgot", undefined, "forgot", undefined) /* "Here's a hint" "This password you set should not be used because it glitches the system" */ 
-passwordCheck(undefined, "reset", undefined, undefined, "reset") /* "Let's reset your account" */
-passwordCheck(undefined, "jenis", 6, undefined, undefined) /* "Your password is too short!" */
+passwordCheck("jenis1", "jenis1", 6, "forgot", "reset") /* Access Granted! */
+passwordCheck("jenis1", "shmenis2", 6, "forgot", "reset") /* Access Denied! Your password is too long!*/
+passwordCheck("jenis1", "jenis2", 6, "forgot", "reset") /* Access Denied! */
+passwordCheck("jenis1", "jenis", 6, "forgot", "reset") /* Access Denied! Your password is too short! */
+passwordCheck("jenis1", "forgot", 6, "forgot", "reset") /* Here's a hint. The password you set should not be used because it glitches the system" */ 
+passwordCheck("jenis1", "reset", 6, "forgot", "reset") /* Let's reset your account */
+passwordCheck("jenis1", "jenis", 6, "forgot", "reset") /* Access Denied! Your password is too short! */
